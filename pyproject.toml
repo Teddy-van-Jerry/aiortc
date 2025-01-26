@@ -10,6 +10,7 @@ requires-python = ">=3.8"
 license = { text = "BSD-3-Clause" }
 authors = [
     { name = "Jeremy Lainé", email = "jeremy.laine@m4x.org" },
+    { name = "Teddy van Jerry", email = "me@teddy-van-jerry.org" }
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -46,9 +47,7 @@ dev = [
 ]
 
 [project.urls]
-homepage = "https://github.com/aiortc/aiortc"
-changelog = "https://aiortc.readthedocs.io/en/stable/changelog.html"
-documentation = "https://aiortc.readthedocs.io/"
+homepage = "https://github.com/Teddy-van-Jerry/aiortc"
 
 [tool.coverage.report]
 exclude_lines = ["pragma: no cover"]

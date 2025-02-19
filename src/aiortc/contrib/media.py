@@ -335,9 +335,9 @@ class MediaPlayer:
         self._throttle_playback = not container_format.intersection(REAL_TIME_FORMATS)
 
         # check whether the looping is supported
-        assert (
-            not loop or self.__container.duration is not None
-        ), "The `loop` argument requires a seekable file"
+        assert not loop or self.__container.duration is not None, (
+            "The `loop` argument requires a seekable file"
+        )
         self._loop_playback = loop
 
     @property
@@ -433,6 +433,8 @@ class MediaRecorder:
                 codec_name = "pcm_s16le"
             elif self.__container.format.name == "mp3":
                 codec_name = "mp3"
+            elif self.__container.format.name == "ogg":
+                codec_name = "libopus"
             else:
                 codec_name = "aac"
             stream = self.__container.add_stream(codec_name)

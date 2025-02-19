@@ -16,11 +16,11 @@ from .base import Decoder, Encoder
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_BITRATE = 1000000  # 1 Mbps
-MIN_BITRATE = 500000  # 500 kbps
-MAX_BITRATE = 3000000  # 3 Mbps
+DEFAULT_BITRATE = 10_000_000  # 10 Mbps
+MIN_BITRATE = 5_000_000  # 100 kbps -> 1 Mbps
+MAX_BITRATE = 50_000_000  # 50 Mbps
 
-MAX_FRAME_RATE = 30
+MAX_FRAME_RATE = 60
 PACKET_MAX = 1300
 
 NAL_TYPE_FU_A = 28
@@ -118,6 +118,7 @@ class H264Decoder(Decoder):
                 "H264Decoder() failed to decode, skipping package: " + str(e)
             )
             return []
+        # return [encoded_frame]
 
 
 def create_encoder_context(
@@ -133,6 +134,7 @@ def create_encoder_context(
     codec.options = {
         "profile": "baseline",
         "level": "31",
+        # "preset": "ultrafast",
         "tune": "zerolatency",  # does nothing using h264_omx
     }
     codec.open()
@@ -288,6 +290,7 @@ class H264Encoder(Encoder):
         if self.codec is None:
             try:
                 self.codec, self.codec_buffering = create_encoder_context(
+                    # "libx264", frame.width, frame.height, bitrate=self.target_bitrate
                     "h264_omx", frame.width, frame.height, bitrate=self.target_bitrate
                 )
             except Exception:

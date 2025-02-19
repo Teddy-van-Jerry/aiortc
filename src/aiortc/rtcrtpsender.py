@@ -262,7 +262,8 @@ class RTCRtpSender:
                         "- receiver estimated maximum bitrate %d bps", bitrate
                     )
                     if self.__encoder and hasattr(self.__encoder, "target_bitrate"):
-                        self.__encoder.target_bitrate = bitrate
+                        # self.__encoder.target_bitrate = bitrate
+                        pass
             except ValueError:
                 pass
 
